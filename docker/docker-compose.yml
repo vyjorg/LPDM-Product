@@ -1,0 +1,15 @@
+version: '3.5'
+services:
+  ms-product:
+    image: postgres:alpine
+    ports:
+    - '28185:5432'
+    container_name: LPDM-ProductDB
+    environment:
+      POSTGRES_DB: db_product
+      POSTGRES_USER: usr_product
+      POSTGRES_PASSWORD: product
+    volumes:
+    - './sql:/docker-entrypoint-initdb.d'
+    restart: always
+    network_mode: bridge
