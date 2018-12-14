@@ -76,4 +76,26 @@ public class ProductController {
         return listCategory;
     }
 
+    @GetMapping(value = "/products/category/{id}")
+    public List<Product> listProductByCategory(@PathVariable int id){
+        List<Product> listProducts = productDao.findByCategory_Id(id);
+
+        for(Product tempProduct : listProducts){
+            System.out.println(tempProduct.toString());
+        }
+
+        return listProducts;
+    }
+
+    @PostMapping(value = "/products/category")
+    public List<Product> listProductByCategory2(@RequestBody Category category){
+        List<Product> listProducts = productDao.findByCategory_Id(category.getId());
+
+        for(Product tempProduct : listProducts){
+            System.out.println(tempProduct.toString());
+        }
+
+        return listProducts;
+    }
+
 }
