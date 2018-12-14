@@ -69,13 +69,6 @@ public class ProductController {
         stockProxy.updateStock(product.getStock());
     }
 
-    @GetMapping(value = "/categories")
-    public List<Category> listCategories(){
-        List<Category> listCategory = categoryDao.findAll();
-
-        return listCategory;
-    }
-
     @GetMapping(value = "/products/category/{id}")
     public List<Product> listProductByCategory(@PathVariable int id){
         List<Product> listProducts = productDao.findByCategory_Id(id);
