@@ -1,6 +1,8 @@
 package com.lpdm.msproduct.controller;
 
+import com.lpdm.msproduct.dao.CategoryDao;
 import com.lpdm.msproduct.dao.ProductDao;
+import com.lpdm.msproduct.entity.Category;
 import com.lpdm.msproduct.entity.Product;
 import com.lpdm.msproduct.entity.Stock;
 import com.lpdm.msproduct.proxy.StockProxy;
@@ -14,6 +16,9 @@ public class ProductController {
 
     @Autowired
     private ProductDao productDao;
+
+    @Autowired
+    private CategoryDao categoryDao;
 
     @Autowired
     private StockProxy stockProxy;
@@ -62,6 +67,13 @@ public class ProductController {
         product.setStockId(product.getStock().getId());
         productDao.save(product);
         stockProxy.updateStock(product.getStock());
+    }
+
+    @GetMapping(value = "/categories")
+    public List<Category> listCategories(){
+        List<Category> listCategory = categoryDao.findAll();
+
+        return listCategory;
     }
 
 }
