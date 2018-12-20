@@ -51,4 +51,5 @@ public class Stock {
     public void setUnitByPackage(Integer unitByPackage) {
         this.unitByPackage = unitByPackage;
     }
+
 }

@@ -3,6 +3,7 @@ package com.lpdm.msproduct.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="product",schema = "public")
@@ -25,12 +26,11 @@ public class Product {
     @Column
     private double price;
 
-    @JsonIgnore
-    @Column(name="stock_id")
-    private Integer stockId;
+    @Column
+    private double tva;
 
     @Transient
-    private Stock stock;
+    private List<Stock> listStock;
 
     @Column
     private String picture;
@@ -78,12 +78,20 @@ public class Product {
         this.price = price;
     }
 
-    public Integer getStockId() {
-        return stockId;
+    public double getTva() {
+        return tva;
     }
 
-    public void setStockId(Integer stockId) {
-        this.stockId = stockId;
+    public void setTva(double tva) {
+        this.tva = tva;
+    }
+
+    public List<Stock> getListStock() {
+        return listStock;
+    }
+
+    public void setListStock(List<Stock> listStock) {
+        this.listStock = listStock;
     }
 
     public String getPicture() {
@@ -100,13 +108,5 @@ public class Product {
 
     public void setProductorID(Integer productorID) {
         this.productorID = productorID;
-    }
-
-    public Stock getStock() {
-        return stock;
-    }
-
-    public void setStock(Stock stock) {
-        this.stock = stock;
     }
 }

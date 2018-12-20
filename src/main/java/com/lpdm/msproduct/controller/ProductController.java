@@ -18,9 +18,6 @@ public class ProductController {
     private ProductDao productDao;
 
     @Autowired
-    private CategoryDao categoryDao;
-
-    @Autowired
     private StockProxy stockProxy;
 
 
@@ -28,7 +25,7 @@ public class ProductController {
     public List<Product> listProduct(){
         List<Product> list = productDao.findAll();
         for(Product product : list){
-            product.setStock(stockProxy.findById(product.getStockId()));
+            product.setListStock(stockProxy.listStockByProductor(product.getId()));
         }
 
         return list;
@@ -37,17 +34,13 @@ public class ProductController {
     @GetMapping(value="/products/{id}")
     public Product findProduct(@PathVariable int id){
         Product product = productDao.findById(id);
-        product.setStock(stockProxy.findById(product.getStockId()));
+        product.setListStock(stockProxy.listStockByProductor(product.getId()));
 
         return product;
     }
 
     @PostMapping(value = "/products")
     public void addProduct(@RequestBody Product product){
-
-        Stock stockAdded= stockProxy.addStock(product.getStock());
-        product.setStockId(stockAdded.getId());
-
         Product productAdded = productDao.save(product);
 
         if (productAdded.equals(null)){
@@ -56,22 +49,31 @@ public class ProductController {
     }
 
     @DeleteMapping(value="/products/{id}")
-    public void deleteStock(@PathVariable int id){
+    public void deleteProduct(@PathVariable int id){
         Product productDelete = productDao.findById(id);
         productDao.deleteById(id);
-        stockProxy.deleteStock(productDelete.getStockId());
+
+        if(!productDelete.getListStock().equals(null)){
+            for(Stock stockDelete : productDelete.getListStock()){
+                stockProxy.deleteStock(stockDelete.getId());
+            }
+        }
     }
 
     @PutMapping(value="/products")
-    public void updateStock(@RequestBody Product product){
-        product.setStockId(product.getStock().getId());
+    public void updateProduct(@RequestBody Product product){
         productDao.save(product);
-        stockProxy.updateStock(product.getStock());
+
+        if(!product.getListStock().equals(null)){
+            for(Stock stockUpdate : product.getListStock()){
+                stockProxy.updateStock(stockUpdate);
+            }
+        }
     }
 
     @GetMapping(value = "/products/category/{id}")
     public List<Product> listProductByCategory(@PathVariable int id){
-        List<Product> listProducts = productDao.findByCategory_Id(id);
+        List<Product> listProducts = productDao.findByCategoryId(id);
 
         for(Product tempProduct : listProducts){
             System.out.println(tempProduct.toString());
@@ -82,7 +84,7 @@ public class ProductController {
 
     @PostMapping(value = "/products/category")
     public List<Product> listProductByCategory2(@RequestBody Category category){
-        List<Product> listProducts = productDao.findByCategory_Id(category.getId());
+        List<Product> listProducts = productDao.findByCategoryId(category.getId());
 
         for(Product tempProduct : listProducts){
             System.out.println(tempProduct.toString());
@@ -91,4 +93,10 @@ public class ProductController {
         return listProducts;
     }
 
+    @PostMapping(value = "/products/categoryandproductor")
+    public List<Product> listProductByCategoryAndProductor(@RequestBody Category category, int productorId){
+        List<Product> listProducts = productDao.findByCategoryIdAndAndProductorID(category.getId(),productorId);
+
+        return listProducts;
+    }
 }
