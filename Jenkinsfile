@@ -31,7 +31,7 @@ pipeline {
             steps {
                 sh 'docker stop LPDM-ProductMS || true && docker rm LPDM-ProductMS || true'
                 sh 'docker pull vyjorg/lpdm-product:latest'
-                sh 'docker run -d --name LPDM-ProductMS -p 28085:28085 --link LPDM-ProductDB --restart always --memory-swappiness=0  vyjorg/lpdm-product:latest'
+                sh 'docker run -d --name LPDM-ProductMS -p 28085:28085 --restart always --memory-swappiness=0  vyjorg/lpdm-product:latest'
             }
         }
     }
