@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: ms-product
+  cloud:
+    config:
+      allow-override: true
+      uri: https://config.lpdm.kybox.fr
+  main:
+    allow-bean-definition-overriding: true
