@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table(name="product",schema = "public")
@@ -36,7 +37,11 @@ public class Product {
     private String picture;
 
     @Column(name="producer_id")
+    @JsonIgnore
     private Integer producerID;
+
+    @Transient
+    private Optional<Producer> producer;
 
     public Integer getId() {
         return id;
@@ -108,5 +113,13 @@ public class Product {
 
     public void setProducerID(Integer producerID) {
         this.producerID = producerID;
+    }
+
+    public Optional<Producer> getProducer() {
+        return producer;
+    }
+
+    public void setProducer(Optional<Producer> producer) {
+        this.producer = producer;
     }
 }

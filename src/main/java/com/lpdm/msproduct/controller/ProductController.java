@@ -5,6 +5,7 @@ import com.lpdm.msproduct.dao.ProductDao;
 import com.lpdm.msproduct.entity.Category;
 import com.lpdm.msproduct.entity.Product;
 import com.lpdm.msproduct.entity.Stock;
+import com.lpdm.msproduct.proxy.ProducerProxy;
 import com.lpdm.msproduct.proxy.StockProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,12 +22,16 @@ public class ProductController {
     @Autowired
     private StockProxy stockProxy;
 
+    @Autowired
+    private ProducerProxy producerProxy;
+
 
     @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProduct(){
         List<Product> list = productDao.findAll();
         for(Product product : list){
             product.setListStock(stockProxy.listStockByProducer(product.getId()));
+            product.setProducer(producerProxy.findById(product.getProducerID()));
         }
 
         return list;
@@ -36,6 +41,7 @@ public class ProductController {
     public Product findProduct(@PathVariable int id){
         Product product = productDao.findById(id);
         product.setListStock(stockProxy.listStockByProducer(product.getId()));
+        product.setProducer(producerProxy.findById(product.getProducerID()));
 
         return product;
     }
