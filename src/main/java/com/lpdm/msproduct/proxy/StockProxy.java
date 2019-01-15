@@ -28,6 +28,6 @@ public interface StockProxy {
     @RequestMapping(value="/ms-stock/stocks")
     Stock updateStock(@RequestBody Stock stock);
 
-    @RequestMapping(value = "/ms-stock/stocks/productor/{id}")
-    List<Stock> listStockByProductor(@PathVariable(value = "id") int id);
+    @RequestMapping(value = "/ms-stock/stocks/producer/{id}")
+    List<Stock> listStockByProducer(@PathVariable(value = "id") int id);
 }

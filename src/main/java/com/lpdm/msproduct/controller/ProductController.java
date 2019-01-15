@@ -26,7 +26,7 @@ public class ProductController {
     public List<Product> listProduct(){
         List<Product> list = productDao.findAll();
         for(Product product : list){
-            product.setListStock(stockProxy.listStockByProductor(product.getId()));
+            product.setListStock(stockProxy.listStockByProducer(product.getId()));
         }
 
         return list;
@@ -35,7 +35,7 @@ public class ProductController {
     @GetMapping(value="/products/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Product findProduct(@PathVariable int id){
         Product product = productDao.findById(id);
-        product.setListStock(stockProxy.listStockByProductor(product.getId()));
+        product.setListStock(stockProxy.listStockByProducer(product.getId()));
 
         return product;
     }
