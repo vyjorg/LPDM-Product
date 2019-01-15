@@ -94,9 +94,9 @@ public class ProductController {
         return listProducts;
     }
 
-    @PostMapping(value = "/products/categoryandproductor", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<Product> listProductByCategoryAndProductor(@RequestBody Category category, int productorId){
-        List<Product> listProducts = productDao.findByCategoryIdAndAndProductorID(category.getId(),productorId);
+    @PostMapping(value = "/products/categoryandproducer", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<Product> listProductByCategoryAndProducer(@RequestBody Category category, int producerId){
+        List<Product> listProducts = productDao.findByCategoryIdAndAndProducerID(category.getId(),producerId);
 
         return listProducts;
     }
