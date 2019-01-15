@@ -1,14 +1,13 @@
 package com.lpdm.msproduct.entity;
 
-import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Stock {
 
     private Integer id;
     private Integer quantity;
-    private LocalDateTime expireDate;
+    private LocalDate expireDate;
     private String packaging;
     private Integer unitByPackage;
 
@@ -28,11 +27,11 @@ public class Stock {
         this.quantity = quantity;
     }
 
-    public LocalDateTime getExpireDate() {
+    public LocalDate getExpireDate() {
         return expireDate;
     }
 
-    public void setExpireDate(LocalDateTime expireDate) {
+    public void setExpireDate(LocalDate expireDate) {
         this.expireDate = expireDate;
     }
 
