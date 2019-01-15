@@ -7,6 +7,7 @@ import com.lpdm.msproduct.entity.Product;
 import com.lpdm.msproduct.entity.Stock;
 import com.lpdm.msproduct.proxy.StockProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class ProductController {
     private StockProxy stockProxy;
 
 
-    @GetMapping(value = "/products")
+    @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProduct(){
         List<Product> list = productDao.findAll();
         for(Product product : list){
@@ -31,7 +32,7 @@ public class ProductController {
         return list;
     }
 
-    @GetMapping(value="/products/{id}")
+    @GetMapping(value="/products/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Product findProduct(@PathVariable int id){
         Product product = productDao.findById(id);
         product.setListStock(stockProxy.listStockByProductor(product.getId()));
@@ -39,7 +40,7 @@ public class ProductController {
         return product;
     }
 
-    @PostMapping(value = "/products")
+    @PostMapping(value = "/products", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void addProduct(@RequestBody Product product){
         Product productAdded = productDao.save(product);
 
@@ -48,7 +49,7 @@ public class ProductController {
         }
     }
 
-    @DeleteMapping(value="/products/{id}")
+    @DeleteMapping(value="/products/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void deleteProduct(@PathVariable int id){
         Product productDelete = productDao.findById(id);
         productDao.deleteById(id);
@@ -60,7 +61,7 @@ public class ProductController {
         }
     }
 
-    @PutMapping(value="/products")
+    @PutMapping(value="/products", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void updateProduct(@RequestBody Product product){
         productDao.save(product);
 
@@ -71,7 +72,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping(value = "/products/category/{id}")
+    @GetMapping(value = "/products/category/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByCategory(@PathVariable int id){
         List<Product> listProducts = productDao.findByCategoryId(id);
 
@@ -82,7 +83,7 @@ public class ProductController {
         return listProducts;
     }
 
-    @PostMapping(value = "/products/category")
+    @PostMapping(value = "/products/category", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByCategory2(@RequestBody Category category){
         List<Product> listProducts = productDao.findByCategoryId(category.getId());
 
@@ -93,7 +94,7 @@ public class ProductController {
         return listProducts;
     }
 
-    @PostMapping(value = "/products/categoryandproductor")
+    @PostMapping(value = "/products/categoryandproductor", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByCategoryAndProductor(@RequestBody Category category, int productorId){
         List<Product> listProducts = productDao.findByCategoryIdAndAndProductorID(category.getId(),productorId);
 

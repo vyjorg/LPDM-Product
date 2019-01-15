@@ -3,6 +3,7 @@ package com.lpdm.msproduct.controller;
 import com.lpdm.msproduct.dao.CategoryDao;
 import com.lpdm.msproduct.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,21 +14,21 @@ public class CategoryController {
     @Autowired
     private CategoryDao categoryDao;
 
-    @GetMapping(value = "/categories")
+    @GetMapping(value = "/categories", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Category> listCategories(){
         List<Category> listCategory = categoryDao.findAll();
 
         return listCategory;
     }
 
-    @GetMapping(value = "/categories/{id}")
+    @GetMapping(value = "/categories/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Category category(@PathVariable int id){
         Category category = categoryDao.findById(id);
 
         return category;
     }
 
-    @PostMapping(value = "/categories")
+    @PostMapping(value = "/categories", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void addCategory(@RequestBody Category category){
         Category categoryAdded = categoryDao.save(category);
 
@@ -36,12 +37,12 @@ public class CategoryController {
         }
     }
 
-    @DeleteMapping(value="/categories/{id}")
+    @DeleteMapping(value="/categories/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void deleteCategory(@PathVariable int id){
         categoryDao.deleteById(id);
     }
 
-    @PutMapping(value = "/categories")
+    @PutMapping(value = "/categories", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void updateCategory(@RequestBody Category category){
         categoryDao.save(category);
     }
