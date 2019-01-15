@@ -35,8 +35,8 @@ public class Product {
     @Column
     private String picture;
 
-    @Column(name="productor_id")
-    private Integer productorID;
+    @Column(name="producer_id")
+    private Integer producerID;
 
     public Integer getId() {
         return id;
@@ -102,11 +102,11 @@ public class Product {
         this.picture = picture;
     }
 
-    public Integer getProductorID() {
-        return productorID;
+    public Integer getProducerID() {
+        return producerID;
     }
 
-    public void setProductorID(Integer productorID) {
-        this.productorID = productorID;
+    public void setProducerID(Integer producerID) {
+        this.producerID = producerID;
     }
 }

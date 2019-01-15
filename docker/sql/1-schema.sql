@@ -18,7 +18,7 @@ CREATE TABLE public.product (
                 label VARCHAR NOT NULL,
                 price DOUBLE PRECISION NOT NULL,
                 tva DOUBLE PRECISION NOT NULL,
-                productor_id INTEGER NOT NULL,
+                producer_id INTEGER NOT NULL,
                 picture VARCHAR NOT NULL,
                 category_id INTEGER NOT NULL,
                 CONSTRAINT product_pk PRIMARY KEY (id)
