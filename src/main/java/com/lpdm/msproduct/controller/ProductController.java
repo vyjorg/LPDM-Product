@@ -120,7 +120,7 @@ public class ProductController {
         return listProducts;
     }
 
-    @GetMapping(value = "/products/name/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/products/name/{name}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByName(@PathVariable String name){
         List<Product> listProducts = productDao.findByName(name);
 
