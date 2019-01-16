@@ -21,6 +21,7 @@ CREATE TABLE public.product (
                 producer_id INTEGER NOT NULL,
                 picture VARCHAR NOT NULL,
                 category_id INTEGER NOT NULL,
+                deactivate BOOLEAN NOT NULL,
                 CONSTRAINT product_pk PRIMARY KEY (id)
 );
 

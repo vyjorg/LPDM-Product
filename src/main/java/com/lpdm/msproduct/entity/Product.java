@@ -30,6 +30,9 @@ public class Product {
     @Column
     private double tva;
 
+    @Column
+    private boolean deactivate;
+
     @Transient
     private List<Stock> listStock;
 
@@ -121,5 +124,13 @@ public class Product {
 
     public void setProducer(Optional<Producer> producer) {
         this.producer = producer;
+    }
+
+    public boolean isDeactivate() {
+        return deactivate;
+    }
+
+    public void setDeactivate(boolean deactivate) {
+        this.deactivate = deactivate;
     }
 }
