@@ -82,8 +82,9 @@ public class ProductController {
     public List<Product> listProductByCategory(@PathVariable int id){
         List<Product> listProducts = productDao.findByCategoryId(id);
 
-        for(Product tempProduct : listProducts){
-            System.out.println(tempProduct.toString());
+        for(Product product : listProducts){
+            product.setListStock(stockProxy.listStockByProducer(product.getId()));
+            product.setProducer(producerProxy.findById(product.getProducerID()));
         }
 
         return listProducts;
@@ -103,6 +104,30 @@ public class ProductController {
     @PostMapping(value = "/products/categoryandproducer", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByCategoryAndProducer(@RequestBody Category category, int producerId){
         List<Product> listProducts = productDao.findByCategoryIdAndAndProducerID(category.getId(),producerId);
+
+        return listProducts;
+    }
+
+    @GetMapping(value = "/products/producer/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<Product> listProductByProducerId(@PathVariable int id){
+        List<Product> listProducts = productDao.findByProducerID(id);
+
+        for(Product product : listProducts){
+            product.setListStock(stockProxy.listStockByProducer(product.getId()));
+            product.setProducer(producerProxy.findById(product.getProducerID()));
+        }
+
+        return listProducts;
+    }
+
+    @GetMapping(value = "/products/name/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<Product> listProductByName(@PathVariable String name){
+        List<Product> listProducts = productDao.findByName(name);
+
+        for(Product product : listProducts){
+            product.setListStock(stockProxy.listStockByProducer(product.getId()));
+            product.setProducer(producerProxy.findById(product.getProducerID()));
+        }
 
         return listProducts;
     }
