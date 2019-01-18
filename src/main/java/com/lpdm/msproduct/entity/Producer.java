@@ -1,5 +1,7 @@
 package com.lpdm.msproduct.entity;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 public class Producer {
@@ -7,11 +9,14 @@ public class Producer {
     private int id;
     private String email;
     private String password;
-    private Enum<Access> role;
     private Collection<AppRole> roles;
     private String name;
     private String firstName;
-    private String lastName;
+    private String tel;
+    private LocalDate birthday;
+    private LocalDateTime registrationDate;
+    private int addressId;
+    private Boolean active = true;
 
     public int getId() {
         return id;
@@ -35,14 +40,6 @@ public class Producer {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Enum<Access> getRole() {
-        return role;
-    }
-
-    public void setRole(Enum<Access> role) {
-        this.role = role;
     }
 
     public Collection<AppRole> getRoles() {
@@ -69,11 +66,43 @@ public class Producer {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getTel() {
+        return tel;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    public LocalDateTime getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(LocalDateTime registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public int getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
