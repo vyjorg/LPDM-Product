@@ -17,13 +17,13 @@ import java.util.Optional;
 public interface ProducerProxy {
 
     @RequestMapping(path = "microservice-authentication/users/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    Optional<Producer> findById(@PathVariable(value = "id") int id);
+    Producer findById(@PathVariable(value = "id") int id);
 
     @RequestMapping(path = "microservice-authentication/users/name/{name}",
             method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    Optional<Producer> findByLastName(@PathVariable(value = "name") String name);
+    Producer findByLastName(@PathVariable(value = "name") String name);
 
     @RequestMapping(path = "microservice-authentication/users/email/{email}",
             method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    Optional<Producer> findByEmail(@PathVariable(value = "email") String name);
+    Producer findByEmail(@PathVariable(value = "email") String name);
 }

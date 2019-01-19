@@ -44,7 +44,7 @@ public class Product {
     private Integer producerID;
 
     @Transient
-    private Optional<Producer> producer;
+    private Producer producer;
 
     public Integer getId() {
         return id;
@@ -118,11 +118,11 @@ public class Product {
         this.producerID = producerID;
     }
 
-    public Optional<Producer> getProducer() {
+    public Producer getProducer() {
         return producer;
     }
 
-    public void setProducer(Optional<Producer> producer) {
+    public void setProducer(Producer producer) {
         this.producer = producer;
     }
 
