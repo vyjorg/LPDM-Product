@@ -105,4 +105,21 @@ public class Producer {
     public void setActive(Boolean active) {
         this.active = active;
     }
+
+    @Override
+    public String toString() {
+        return "Producer{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", tel='" + tel + '\'' +
+                ", birthday=" + birthday +
+                ", registrationDate=" + registrationDate +
+                ", addressId=" + addressId +
+                ", active=" + active +
+                '}';
+    }
 }

@@ -47,11 +47,13 @@ public class ProductController {
     @GetMapping(value="/products/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Product findProduct(@PathVariable int id){
         log.info("ProductController -> méthode findProduct : entrée ");
+        log.info("ProductController -> méthode findProduct : id envoyé = "+id);
         Product product = productDao.findById(id);
         product.setListStock(stockProxy.listStockByProducer(product.getId()));
         product.setProducer(producerProxy.findById(product.getProducerID()));
         log.debug("ProductController -> méthode findProduct : test Producer = "+product.getProducer().getName());
 
+        log.info("ProductController -> méthode findProduct : product envoyé = "+product.toString());
         log.info("ProductController -> méthode findProduct : sortie ");
         return product;
     }
@@ -59,6 +61,7 @@ public class ProductController {
     @PostMapping(value = "/products", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void addProduct(@RequestBody Product product){
         log.info("ProductController -> méthode addProduct : entrée ");
+        log.info("ProductController -> méthode addProduct : product reçu = "+product.toString());
         product.setProducerID(product.getProducer().getId());
         log.debug("ProductController -> méthode findProduct : test ProducerId = "+product.getProducer().getId());
         Product productAdded = productDao.save(product);
@@ -72,6 +75,7 @@ public class ProductController {
     @DeleteMapping(value="/products/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void deleteProduct(@PathVariable int id){
         log.info("ProductController -> méthode deleteProduct : entrée ");
+        log.info("ProductController -> méthode deleteProduct : id envoyé = "+id);
         Product productDelete = productDao.findById(id);
         productDao.deleteById(id);
 
@@ -86,6 +90,8 @@ public class ProductController {
     @PutMapping(value="/products", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void updateProduct(@RequestBody Product product){
         log.info("ProductController -> méthode updateProduct : entrée ");
+        log.info("ProductController -> méthode updateProduct : product reçu = "+product.toString());
+
         product.setProducerID(product.getProducer().getId());
         log.debug("ProductController -> méthode updateProduct : test ProducerID = "+product.getProducer().getId());
         productDao.save(product);
@@ -102,6 +108,7 @@ public class ProductController {
     @GetMapping(value = "/products/category/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByCategoryById(@PathVariable int id){
         log.info("ProductController -> méthode listProductByCategoryById : entrée ");
+        log.info("ProductController -> méthode listProductByCategoryById : id envoyé = "+id);
         List<Product> listProducts = productDao.findByCategoryId(id);
 
         log.debug("ProductController -> méthode listProductByCategoryById : test listProducts = "+listProducts.size());
@@ -118,6 +125,7 @@ public class ProductController {
     @PostMapping(value = "/products/category", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByCategory(@RequestBody Category category){
         log.info("ProductController -> méthode listProductByCategory : entrée ");
+        log.info("ProductController -> méthode listProductByCategory : category reçu = "+category.toString());
         List<Product> listProducts = productDao.findByCategoryId(category.getId());
 
         for(Product product : listProducts){
@@ -132,6 +140,7 @@ public class ProductController {
     @GetMapping(value = "/products/producer/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByProducerId(@PathVariable int id){
         log.info("ProductController -> méthode listProductByProducerId : entrée ");
+        log.info("ProductController -> méthode listProductByProducerId : id envoyé = "+id);
         List<Product> listProducts = productDao.findByProducerID(id);
 
         for(Product product : listProducts){
@@ -146,6 +155,7 @@ public class ProductController {
     @GetMapping(value = "/products/name/{name}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByName(@PathVariable String name){
         log.info("ProductController -> méthode listProductByName : entrée ");
+        log.info("ProductController -> méthode listProductByName : name envoyé = "+name);
         List<Product> listProducts = productDao.findByName(name);
 
         for(Product product : listProducts){

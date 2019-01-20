@@ -133,4 +133,21 @@ public class Product {
     public void setDeactivate(boolean deactivate) {
         this.deactivate = deactivate;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category=" + category +
+                ", label='" + label + '\'' +
+                ", price=" + price +
+                ", tva=" + tva +
+                ", deactivate=" + deactivate +
+                ", listStock=" + listStock +
+                ", picture='" + picture + '\'' +
+                ", producerID=" + producerID +
+                ", producer=" + producer +
+                '}';
+    }
 }

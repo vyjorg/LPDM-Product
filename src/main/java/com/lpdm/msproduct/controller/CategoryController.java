@@ -33,6 +33,7 @@ public class CategoryController {
         Category category = categoryDao.findById(id);
         log.debug("CategoryController -> méthode category : test category = "+category.getId());
 
+        log.info("CategoryController -> méthode category : category envoyé = "+category.toString());
         log.info("CategoryController -> méthode category : sortie ");
         return category;
     }
@@ -40,6 +41,7 @@ public class CategoryController {
     @PostMapping(value = "/categories", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void addCategory(@RequestBody Category category){
         log.info("CategoryController -> méthode addCategory : entrée ");
+        log.info("CategoryController -> méthode addCategory : category reçu = "+category.toString());
         Category categoryAdded = categoryDao.save(category);
 
         if(categoryAdded.equals(null)){
@@ -51,6 +53,7 @@ public class CategoryController {
     @DeleteMapping(value="/categories/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void deleteCategory(@PathVariable int id){
         log.info("CategoryController -> méthode deleteCategory : entrée ");
+        log.info("CategoryController -> méthode deleteCategory : id reçu = "+id);
         categoryDao.deleteById(id);
         log.info("CategoryController -> méthode deleteCategory : sortie ");
     }
@@ -58,6 +61,7 @@ public class CategoryController {
     @PutMapping(value = "/categories", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void updateCategory(@RequestBody Category category){
         log.info("CategoryController -> méthode updateCategory : entrée ");
+        log.info("CategoryController -> méthode updateCategory : category reçu = "+category.toString());
         categoryDao.save(category);
         log.info("CategoryController -> méthode updateCategory : sortie ");
     }

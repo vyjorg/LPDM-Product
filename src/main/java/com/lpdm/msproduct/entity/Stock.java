@@ -51,4 +51,14 @@ public class Stock {
         this.unitByPackage = unitByPackage;
     }
 
+    @Override
+    public String toString() {
+        return "Stock{" +
+                "id=" + id +
+                ", quantity=" + quantity +
+                ", expireDate=" + expireDate +
+                ", packaging='" + packaging + '\'' +
+                ", unitByPackage=" + unitByPackage +
+                '}';
+    }
 }
