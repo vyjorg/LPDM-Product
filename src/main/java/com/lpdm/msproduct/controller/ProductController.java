@@ -156,7 +156,7 @@ public class ProductController {
     public List<Product> listProductByName(@PathVariable String name){
         log.info("ProductController -> méthode listProductByName : entrée ");
         log.info("ProductController -> méthode listProductByName : name envoyé = "+name);
-        List<Product> listProducts = productDao.findByName(name);
+        List<Product> listProducts = productDao.findAllByNameContainingIgnoreCase(name);
 
         for(Product product : listProducts){
             log.info("ProductController -> méthode listProductByName : entrée ");
