@@ -10,6 +10,7 @@ public class Stock {
     private LocalDate expireDate;
     private String packaging;
     private Integer unitByPackage;
+    private String description;
 
     public Integer getId() {
         return id;
@@ -51,6 +52,14 @@ public class Stock {
         this.unitByPackage = unitByPackage;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "Stock{" +
@@ -59,6 +68,7 @@ public class Stock {
                 ", expireDate=" + expireDate +
                 ", packaging='" + packaging + '\'' +
                 ", unitByPackage=" + unitByPackage +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

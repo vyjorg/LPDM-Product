@@ -6,5 +6,5 @@ public class UserRole {
     private AppRole appRole;
 
     private Producer appUser;
-    
+
 }
