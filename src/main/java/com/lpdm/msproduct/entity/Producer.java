@@ -2,14 +2,15 @@ package com.lpdm.msproduct.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Producer {
 
     private int id;
     private String email;
     private String password;
-    private Collection<AppRole> roles;
+    private Set<AppRole> roles = new HashSet<>();
     private String name;
     private String firstName;
     private String tel;
@@ -42,11 +43,11 @@ public class Producer {
         this.password = password;
     }
 
-    public Collection<AppRole> getRoles() {
+    public Set<AppRole> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<AppRole> roles) {
+    public void setRoles(Set<AppRole> roles) {
         this.roles = roles;
     }
 
