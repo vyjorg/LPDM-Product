@@ -36,7 +36,7 @@ public class ProductController {
         List<Product> list = productDao.findAll();
         for(Product product : list){
             log.info("ProductController -> méthode listProduct : boucle ");
-            product.setListStock(stockProxy.listStockByProducer(product.getId()));
+            product.setListStock(stockProxy.listStockByProductId(product.getId()));
             product.setProducer(producerProxy.findById(product.getProducerID()));
         }
         log.debug("ProductController -> méthode listProduct : test list vide = "+list.size());
@@ -49,7 +49,7 @@ public class ProductController {
         log.info("ProductController -> méthode findProduct : entrée ");
         log.info("ProductController -> méthode findProduct : id envoyé = "+id);
         Product product = productDao.findById(id);
-        product.setListStock(stockProxy.listStockByProducer(product.getId()));
+        product.setListStock(stockProxy.listStockByProductId(product.getId()));
         product.setProducer(producerProxy.findById(product.getProducerID()));
         log.debug("ProductController -> méthode findProduct : test Producer = "+product.getProducer().getName());
 
@@ -115,7 +115,7 @@ public class ProductController {
 
         for(Product product : listProducts){
             log.info("ProductController -> méthode listProductByCategoryById : boucle ");
-            product.setListStock(stockProxy.listStockByProducer(product.getId()));
+            product.setListStock(stockProxy.listStockByProductId(product.getId()));
             product.setProducer(producerProxy.findById(product.getProducerID()));
         }
         log.info("ProductController -> méthode listProductByCategoryById : sortie ");
@@ -130,7 +130,7 @@ public class ProductController {
 
         for(Product product : listProducts){
             log.info("ProductController -> méthode listProductByCategory : boucle ");
-            product.setListStock(stockProxy.listStockByProducer(product.getId()));
+            product.setListStock(stockProxy.listStockByProductId(product.getId()));
             product.setProducer(producerProxy.findById(product.getProducerID()));
         }
         log.info("ProductController -> méthode listProductByCategory : sortie ");
@@ -145,7 +145,7 @@ public class ProductController {
 
         for(Product product : listProducts){
             log.info("ProductController -> méthode listProductByProducerId : boucle ");
-            product.setListStock(stockProxy.listStockByProducer(product.getId()));
+            product.setListStock(stockProxy.listStockByProductId(product.getId()));
             product.setProducer(producerProxy.findById(product.getProducerID()));
         }
         log.info("ProductController -> méthode listProductByProducerId : sortie ");
@@ -160,7 +160,7 @@ public class ProductController {
 
         for(Product product : listProducts){
             log.info("ProductController -> méthode listProductByName : entrée ");
-            product.setListStock(stockProxy.listStockByProducer(product.getId()));
+            product.setListStock(stockProxy.listStockByProductId(product.getId()));
             product.setProducer(producerProxy.findById(product.getProducerID()));
         }
 
