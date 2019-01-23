@@ -1,5 +1,7 @@
 INSERT INTO public.category (id,name) VALUES (1,'fruit'),(2,'légume'),(3,'fomage'),(4,'viande'),(5,'poisson'),(6,'yaourt'),(7,'boisson');
 
+SELECT pg_catalog.setval('public.category_id_seq', 7, true);
+
 INSERT INTO public.product VALUES (1, 'Northern Mariana Islands', 'Iceland', 27, 7, 26, 'https://www.auchandirect.fr/backend/media/products_images/0N_57324.jpg', 7, false);
 INSERT INTO public.product VALUES (2, 'British Indian Ocean Territory', 'Spain', 22, 10, 2, 'https://www.auchandirect.fr/backend/media/products_images/0N_57324.jpg', 4, false);
 INSERT INTO public.product VALUES (3, 'Tunisia', 'Lesotho', 29, 14, 14, 'https://www.auchandirect.fr/backend/media/products_images/0N_57324.jpg', 5, false);
@@ -100,3 +102,5 @@ INSERT INTO public.product VALUES (97, 'Suriname', 'Bermuda', 27, 9, 30, 'https:
 INSERT INTO public.product VALUES (98, 'Togo', 'Åland Islands', 18, 10, 4, 'https://www.auchandirect.fr/backend/media/products_images/0N_57324.jpg', 6, false);
 INSERT INTO public.product VALUES (99, 'Bangladesh', 'Ireland', 22, 18, 14, 'https://www.auchandirect.fr/backend/media/products_images/0N_57324.jpg', 6, false);
 INSERT INTO public.product VALUES (100, 'Turkmenistan', 'Virgin Islands, United States', 28, 16, 10, 'https://www.auchandirect.fr/backend/media/products_images/0N_57324.jpg', 6, false);
+
+SELECT pg_catalog.setval('public.product_id_seq', 100, true);
