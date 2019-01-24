@@ -7,7 +7,6 @@ public class AppRole {
 
     private int id;
     private String roleName;
-    private Set<UserRole> roles = new HashSet<>();
 
     public int getId() {
         return id;
@@ -25,20 +24,11 @@ public class AppRole {
         this.roleName = roleName;
     }
 
-    public Set<UserRole> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<UserRole> roles) {
-        this.roles = roles;
-    }
-
     @Override
     public String toString() {
         return "AppRole{" +
                 "id=" + id +
                 ", roleName='" + roleName + '\'' +
-                ", roles=" + roles +
                 '}';
     }
 }

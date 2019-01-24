@@ -2,7 +2,7 @@ package com.lpdm.msproduct.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Producer {
@@ -10,7 +10,7 @@ public class Producer {
     private int id;
     private String email;
     private String password;
-    private Set<AppRole> roles = new HashSet<>();
+    private List<AppRole> appRole;
     private String name;
     private String firstName;
     private String tel;
@@ -43,12 +43,12 @@ public class Producer {
         this.password = password;
     }
 
-    public Set<AppRole> getRoles() {
-        return roles;
+    public List<AppRole> getAppRole() {
+        return appRole;
     }
 
-    public void setRoles(Set<AppRole> roles) {
-        this.roles = roles;
+    public void setAppRole(List<AppRole> appRole) {
+        this.appRole = appRole;
     }
 
     public String getName() {
@@ -113,7 +113,7 @@ public class Producer {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", roles=" + roles +
+                ", appRole=" + appRole +
                 ", name='" + name + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", tel='" + tel + '\'' +
