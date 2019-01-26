@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author Vianney
+ * @version 1.0
+ * @since 07/12/2018
+ */
+
 @RestController
 public class CategoryController {
     private Logger log = LogManager.getLogger(this.getClass());
@@ -17,6 +23,10 @@ public class CategoryController {
     @Autowired
     private CategoryDao categoryDao;
 
+    /**
+     * Call this method to get an {@link List<Category>}
+     * @return An {@link List<Category>} json object
+     */
     @GetMapping(value = "/categories", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Category> listCategories(){
         log.info("CategoryController -> méthode listCategories : entrée ");
@@ -27,6 +37,12 @@ public class CategoryController {
         return listCategory;
     }
 
+
+    /**
+     * Find {@link Category} by the category {@link Integer} id
+     * @param id The {@link Category} {@link Integer} id
+     * @return an {@link Category} json object
+     */
     @GetMapping(value = "/categories/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Category category(@PathVariable int id){
         log.info("CategoryController -> méthode category : entrée ");
@@ -38,6 +54,11 @@ public class CategoryController {
         return category;
     }
 
+
+    /**
+     * Add {@link Category} in database
+     * @param category {@link Category}
+     */
     @PostMapping(value = "/categories", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void addCategory(@RequestBody Category category){
         log.info("CategoryController -> méthode addCategory : entrée ");
@@ -50,6 +71,10 @@ public class CategoryController {
         log.info("CategoryController -> méthode addCategory : sortie ");
     }
 
+    /**
+     * Delete {@link Category} by the category {@link Integer} id
+     * @param id The {@link Category} {@link Integer} id
+     */
     @DeleteMapping(value="/categories/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void deleteCategory(@PathVariable int id){
         log.info("CategoryController -> méthode deleteCategory : entrée ");
@@ -58,6 +83,10 @@ public class CategoryController {
         log.info("CategoryController -> méthode deleteCategory : sortie ");
     }
 
+    /**
+     * Update {@link Category} in database
+     * @param category {@link Category}
+     */
     @PutMapping(value = "/categories", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void updateCategory(@RequestBody Category category){
         log.info("CategoryController -> méthode updateCategory : entrée ");

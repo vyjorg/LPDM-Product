@@ -15,6 +15,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author Vianney
+ * @version 1.0
+ * @since 07/12/2018
+ */
+
 
 @RestController
 public class ProductController {
@@ -30,6 +36,10 @@ public class ProductController {
     private ProducerProxy producerProxy;
 
 
+    /**
+     * Call this method to get an {@link List<Product>}
+     * @return An {@link List<Product>} json object
+     */
     @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProduct(){
         log.info("ProductController -> méthode listProduct : entrée ");
@@ -44,6 +54,11 @@ public class ProductController {
         return list;
     }
 
+    /**
+     * Find {@link Product} by the product {@link Integer} id
+     * @param id The {@link Product} {@link Integer} id
+     * @return an {@link Product} json object
+     */
     @GetMapping(value="/products/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Product findProduct(@PathVariable int id){
         log.info("ProductController -> méthode findProduct : entrée ");
@@ -58,6 +73,10 @@ public class ProductController {
         return product;
     }
 
+    /**
+     * Add {@link Product} in database
+     * @param {@link Product} product
+     */
     @PostMapping(value = "/products", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void addProduct(@RequestBody Product product){
         log.info("ProductController -> méthode addProduct : entrée ");
@@ -72,6 +91,10 @@ public class ProductController {
         log.info("ProductController -> méthode addProduct : sortie ");
     }
 
+    /**
+     * Delete {@link Product} by the product {@link Integer} id
+     * @param id The {@link Product} {@link Integer} id
+     */
     @DeleteMapping(value="/products/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void deleteProduct(@PathVariable int id){
         log.info("ProductController -> méthode deleteProduct : entrée ");
@@ -87,6 +110,10 @@ public class ProductController {
         log.info("ProductController -> méthode deleteProduct : sortie ");
     }
 
+    /**
+     * Update {@link Product} in database
+     * @param {@link Product} product
+     */
     @PutMapping(value="/products", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void updateProduct(@RequestBody Product product){
         log.info("ProductController -> méthode updateProduct : entrée ");
@@ -105,6 +132,11 @@ public class ProductController {
         log.info("ProductController -> méthode updateProduct : sortie ");
     }
 
+    /**
+     * Find {@link List<Product>} by the Category {@link Integer} id
+     * @param id The {@link Category} {@link Integer} id
+     * @return an {@link List<Product>} json object
+     */
     @GetMapping(value = "/products/category/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByCategoryById(@PathVariable int id){
         log.info("ProductController -> méthode listProductByCategoryById : entrée ");
@@ -122,6 +154,11 @@ public class ProductController {
         return listProducts;
     }
 
+    /**
+     * Find {@link List<Product>} by the Category {@link Category}
+     * @param category The {@link Category}
+     * @return an {@link List<Product>} json object
+     */
     @PostMapping(value = "/products/category", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByCategory(@RequestBody Category category){
         log.info("ProductController -> méthode listProductByCategory : entrée ");
@@ -137,6 +174,12 @@ public class ProductController {
         return listProducts;
     }
 
+
+    /**
+     * Find {@link List<Product>} by the producer {@link Integer} id
+     * @param id The {@link com.lpdm.msproduct.entity.Producer} {@link Integer} id
+     * @return an {@link List<Product>} json object
+     */
     @GetMapping(value = "/products/producer/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByProducerId(@PathVariable int id){
         log.info("ProductController -> méthode listProductByProducerId : entrée ");
@@ -152,6 +195,11 @@ public class ProductController {
         return listProducts;
     }
 
+    /**
+     * Find {@link List<Product>} by the product {@link String} name
+     * @param name The {@link Product} {@link String} name
+     * @return an {@link List<Product>} json object
+     */
     @GetMapping(value = "/products/name/{name}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByName(@PathVariable String name){
         log.info("ProductController -> méthode listProductByName : entrée ");
