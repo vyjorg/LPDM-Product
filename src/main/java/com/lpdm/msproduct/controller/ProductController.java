@@ -75,10 +75,11 @@ public class ProductController {
 
     /**
      * Add {@link Product} in database
-     * @param {@link Product} product
+     * @param product {@link Product}
+     * @return productAdded {@link Product}
      */
     @PostMapping(value = "/products", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public void addProduct(@RequestBody Product product){
+    public Product addProduct(@RequestBody Product product){
         log.info("ProductController -> méthode addProduct : entrée ");
         log.info("ProductController -> méthode addProduct : product reçu = "+product.toString());
         product.setProducerID(product.getProducer().getId());
@@ -89,6 +90,8 @@ public class ProductController {
             log.debug("ProductController -> méthode findProduct : erreur lors de l'ajout");
         }
         log.info("ProductController -> méthode addProduct : sortie ");
+
+        return productAdded;
     }
 
     /**
