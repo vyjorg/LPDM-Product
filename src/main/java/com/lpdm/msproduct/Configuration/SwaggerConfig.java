@@ -15,8 +15,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.lpdm.msproduct"))
-                .paths(PathSelectors.regex("/products.*"))
-                .paths(PathSelectors.regex("/categories.*"))
+                .paths(PathSelectors.any())
                 .build();
     }
 }
