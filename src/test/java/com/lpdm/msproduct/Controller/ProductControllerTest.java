@@ -71,7 +71,7 @@ public class ProductControllerTest {
     public void findProductByNameTest() throws Exception {
         Mockito.when(productController.listProductByName("name")).thenReturn(productList);
 
-        mockMvc.perform(get("/products/name"))
+        mockMvc.perform(get("/products/name/name"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().json(ObjToJson.get(productList)));
