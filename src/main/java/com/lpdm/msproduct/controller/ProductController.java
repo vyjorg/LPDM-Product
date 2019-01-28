@@ -8,12 +8,15 @@ import com.lpdm.msproduct.entity.Stock;
 import com.lpdm.msproduct.exception.ProductNotFound;
 import com.lpdm.msproduct.proxy.ProducerProxy;
 import com.lpdm.msproduct.proxy.StockProxy;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -22,7 +25,7 @@ import java.util.List;
  * @since 07/12/2018
  */
 
-
+@Api(description="Controller pour les opérations CRUD sur les products.")
 @RestController
 public class ProductController {
     private Logger log = LogManager.getLogger(this.getClass());
@@ -41,6 +44,7 @@ public class ProductController {
      * Call this method to get an {@link List<Product>}
      * @return An {@link List<Product>} json object
      */
+    @ApiOperation(value = "Récupère tous les produits de la bdd")
     @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProduct(){
         log.info("ProductController -> méthode listProduct : entrée ");
@@ -65,6 +69,7 @@ public class ProductController {
      * @param id The {@link Product} {@link Integer} id
      * @return an {@link Product} json object
      */
+    @ApiOperation(value = "Récupère un produit grâce à son ID si celui-ci existe dans la bdd")
     @GetMapping(value="/products/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Product findProduct(@PathVariable int id){
         log.info("ProductController -> méthode findProduct : entrée ");
@@ -88,8 +93,9 @@ public class ProductController {
      * @param product {@link Product}
      * @return productAdded {@link Product}
      */
+    @ApiOperation(value = "Enregistre un produit si celui-ci est conforme")
     @PostMapping(value = "/products", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Product addProduct(@RequestBody Product product){
+    public Product addProduct(@Valid @RequestBody Product product){
         log.info("ProductController -> méthode addProduct : entrée ");
         log.info("ProductController -> méthode addProduct : product reçu = "+product.toString());
         product.setProducerID(product.getProducer().getId());
@@ -108,6 +114,7 @@ public class ProductController {
      * Delete {@link Product} by the product {@link Integer} id
      * @param id The {@link Product} {@link Integer} id
      */
+    @ApiOperation(value = "Supprime un produit grâce à son ID si celui-ci existe dans la bdd")
     @DeleteMapping(value="/products/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void deleteProduct(@PathVariable int id){
         log.info("ProductController -> méthode deleteProduct : entrée ");
@@ -127,8 +134,9 @@ public class ProductController {
      * Update {@link Product} in database
      * @param {@link Product} product
      */
+    @ApiOperation(value = "Met à jour un produit si celui-ci est conforme")
     @PutMapping(value="/products", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public void updateProduct(@RequestBody Product product){
+    public void updateProduct(@Valid @RequestBody Product product){
         log.info("ProductController -> méthode updateProduct : entrée ");
         log.info("ProductController -> méthode updateProduct : product reçu = "+product.toString());
 
@@ -150,6 +158,7 @@ public class ProductController {
      * @param id The {@link Category} {@link Integer} id
      * @return an {@link List<Product>} json object
      */
+    @ApiOperation(value = "Récupère tous les produits en fonction de l'id de la categorie")
     @GetMapping(value = "/products/category/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByCategoryById(@PathVariable int id){
         log.info("ProductController -> méthode listProductByCategoryById : entrée ");
@@ -176,6 +185,7 @@ public class ProductController {
      * @param category The {@link Category}
      * @return an {@link List<Product>} json object
      */
+    @ApiOperation(value = "Récupère tous les produits en fonction de la categorie")
     @PostMapping(value = "/products/category", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByCategory(@RequestBody Category category){
         log.info("ProductController -> méthode listProductByCategory : entrée ");
@@ -201,6 +211,7 @@ public class ProductController {
      * @param id The {@link com.lpdm.msproduct.entity.Producer} {@link Integer} id
      * @return an {@link List<Product>} json object
      */
+    @ApiOperation(value = "Récupère tous les produits en fonction de l'id du producteur")
     @GetMapping(value = "/products/producer/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByProducerId(@PathVariable int id){
         log.info("ProductController -> méthode listProductByProducerId : entrée ");
@@ -225,6 +236,7 @@ public class ProductController {
      * @param name The {@link Product} {@link String} name
      * @return an {@link List<Product>} json object
      */
+    @ApiOperation(value = "Récupère tous les produits en fonction du nom de celui-ci")
     @GetMapping(value = "/products/name/{name}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByName(@PathVariable String name){
         log.info("ProductController -> méthode listProductByName : entrée ");

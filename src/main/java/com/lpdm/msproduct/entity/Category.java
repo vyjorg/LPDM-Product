@@ -1,6 +1,7 @@
 package com.lpdm.msproduct.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="category",schema = "public")
@@ -11,6 +12,7 @@ public class Category {
     private Integer id;
 
     @Column
+    @NotNull(message = "le nom ne peut être null")
     private String name;
 
     public Integer getId() {

@@ -3,6 +3,8 @@ package com.lpdm.msproduct.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,28 +17,36 @@ public class Product {
     private Integer id;
 
     @Column
+    @NotNull(message = "le nom ne peut être null")
     private String name;
 
     @OneToOne
     @JoinColumn(name = "category_id")
+    @NotNull(message = "la category ne peut être null")
     private Category category;
 
     @Column
+    @NotNull(message = "le label ne peut être null")
     private String label;
 
     @Column
+    @NotNull(message = "le prix ne peut être null")
+    @Min(value = 1,message = "le prix ne peut être 0")
     private double price;
 
     @Column
+    @NotNull(message = "la tva ne peut être null")
     private double tva;
 
     @Column
+    @NotNull(message = "le champ deactivate ne peut être null")
     private boolean deactivate;
 
     @Transient
     private List<Stock> listStock;
 
     @Column
+    @NotNull(message = "la photo ne peut être null")
     private String picture;
 
     @Column(name="producer_id")
@@ -44,6 +54,7 @@ public class Product {
     private Integer producerID;
 
     @Transient
+    @NotNull(message = "le producteur ne peut être null")
     private Producer producer;
 
     public Integer getId() {
