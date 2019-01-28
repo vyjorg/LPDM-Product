@@ -2,6 +2,7 @@ package com.lpdm.msproduct.controller;
 
 import com.lpdm.msproduct.dao.CategoryDao;
 import com.lpdm.msproduct.entity.Category;
+import com.lpdm.msproduct.exception.CategoryNotFound;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,10 @@ public class CategoryController {
     public List<Category> listCategories(){
         log.info("CategoryController -> méthode listCategories : entrée ");
         List<Category> listCategory = categoryDao.findAll();
+
+        if (listCategory == null){
+            throw new CategoryNotFound("Aucune catégory trouvé dans la base de données");
+        }
         log.debug("CategoryController -> méthode listCategories : test listCategory = "+listCategory.size());
 
         log.info("CategoryController -> méthode listCategories : sortie ");
@@ -47,6 +52,10 @@ public class CategoryController {
     public Category category(@PathVariable int id){
         log.info("CategoryController -> méthode category : entrée ");
         Category category = categoryDao.findById(id);
+
+        if (category == null){
+            throw new CategoryNotFound("Aucune catégory trouvé ayant l'id = "+id);
+        }
         log.debug("CategoryController -> méthode category : test category = "+category.getId());
 
         log.info("CategoryController -> méthode category : category envoyé = "+category.toString());

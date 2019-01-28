@@ -5,6 +5,7 @@ import com.lpdm.msproduct.dao.ProductDao;
 import com.lpdm.msproduct.entity.Category;
 import com.lpdm.msproduct.entity.Product;
 import com.lpdm.msproduct.entity.Stock;
+import com.lpdm.msproduct.exception.ProductNotFound;
 import com.lpdm.msproduct.proxy.ProducerProxy;
 import com.lpdm.msproduct.proxy.StockProxy;
 import org.apache.logging.log4j.LogManager;
@@ -44,6 +45,11 @@ public class ProductController {
     public List<Product> listProduct(){
         log.info("ProductController -> méthode listProduct : entrée ");
         List<Product> list = productDao.findAll();
+
+        if (list == null){
+            throw new ProductNotFound("Aucun produit trouvé dans la base de données");
+        }
+
         for(Product product : list){
             log.info("ProductController -> méthode listProduct : boucle ");
             product.setListStock(stockProxy.listStockByProductId(product.getId()));
@@ -64,6 +70,10 @@ public class ProductController {
         log.info("ProductController -> méthode findProduct : entrée ");
         log.info("ProductController -> méthode findProduct : id envoyé = "+id);
         Product product = productDao.findById(id);
+
+        if (product == null){
+            throw new ProductNotFound("Aucun produit trouvé pour l'id = "+id);
+        }
         product.setListStock(stockProxy.listStockByProductId(product.getId()));
         product.setProducer(producerProxy.findById(product.getProducerID()));
         log.debug("ProductController -> méthode findProduct : test Producer = "+product.getProducer().getName());
@@ -146,6 +156,10 @@ public class ProductController {
         log.info("ProductController -> méthode listProductByCategoryById : id envoyé = "+id);
         List<Product> listProducts = productDao.findByCategoryId(id);
 
+        if (listProducts == null){
+            throw new ProductNotFound("Aucun produit trouvé pour la catégory ayant pour id = "+id);
+        }
+
         log.debug("ProductController -> méthode listProductByCategoryById : test listProducts = "+listProducts.size());
 
         for(Product product : listProducts){
@@ -168,6 +182,10 @@ public class ProductController {
         log.info("ProductController -> méthode listProductByCategory : category reçu = "+category.toString());
         List<Product> listProducts = productDao.findByCategoryId(category.getId());
 
+        if (listProducts == null){
+            throw new ProductNotFound("Aucun produit trouvé pour la catégory = "+category.getName());
+        }
+
         for(Product product : listProducts){
             log.info("ProductController -> méthode listProductByCategory : boucle ");
             product.setListStock(stockProxy.listStockByProductId(product.getId()));
@@ -189,6 +207,10 @@ public class ProductController {
         log.info("ProductController -> méthode listProductByProducerId : id envoyé = "+id);
         List<Product> listProducts = productDao.findByProducerID(id);
 
+        if (listProducts == null){
+            throw new ProductNotFound("Aucun produit trouvé pour le producer ayant l'id = "+id);
+        }
+
         for(Product product : listProducts){
             log.info("ProductController -> méthode listProductByProducerId : boucle ");
             product.setListStock(stockProxy.listStockByProductId(product.getId()));
@@ -208,6 +230,10 @@ public class ProductController {
         log.info("ProductController -> méthode listProductByName : entrée ");
         log.info("ProductController -> méthode listProductByName : name envoyé = "+name);
         List<Product> listProducts = productDao.findAllByNameContainingIgnoreCase(name);
+
+        if (listProducts == null){
+            throw new ProductNotFound("Aucun produit trouvé ayant pour name = "+name);
+        }
 
         for(Product product : listProducts){
             log.info("ProductController -> méthode listProductByName : entrée ");
