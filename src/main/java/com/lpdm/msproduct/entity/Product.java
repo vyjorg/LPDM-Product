@@ -35,8 +35,8 @@ public class Product {
     private double price;
 
     @Column
-    @NotNull(message = "la tva ne peut être null")
-    private double tva;
+    @NotNull(message = "la tax ne peut être null")
+    private double tax;
 
     @Column
     @NotNull(message = "le champ deactivate ne peut être null")
@@ -97,12 +97,12 @@ public class Product {
         this.price = price;
     }
 
-    public double getTva() {
-        return tva;
+    public double getTax() {
+        return tax;
     }
 
-    public void setTva(double tva) {
-        this.tva = tva;
+    public void setTax(double tax) {
+        this.tax = tax;
     }
 
     public List<Stock> getListStock() {
@@ -153,7 +153,7 @@ public class Product {
                 ", category=" + category +
                 ", label='" + label + '\'' +
                 ", price=" + price +
-                ", tva=" + tva +
+                ", tax=" + tax +
                 ", deactivate=" + deactivate +
                 ", listStock=" + listStock +
                 ", picture='" + picture + '\'' +
