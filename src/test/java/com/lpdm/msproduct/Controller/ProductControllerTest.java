@@ -46,7 +46,7 @@ public class ProductControllerTest {
         product.setLabel("label");
         product.setPicture("picture");
         product.setPrice(10);
-        product.setTva(10);
+        product.setTax(10);
         product.setDeactivate(false);
 
         productList = new ArrayList<Product>();
