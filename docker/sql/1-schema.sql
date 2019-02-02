@@ -17,7 +17,7 @@ CREATE TABLE public.product (
                 name VARCHAR NOT NULL,
                 label VARCHAR NOT NULL,
                 price DOUBLE PRECISION NOT NULL,
-                tva DOUBLE PRECISION NOT NULL,
+                tax DOUBLE PRECISION NOT NULL,
                 producer_id INTEGER NOT NULL,
                 picture VARCHAR NOT NULL,
                 category_id INTEGER NOT NULL,

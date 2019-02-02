@@ -18,6 +18,7 @@ public class Producer {
     private LocalDateTime registrationDate;
     private int addressId;
     private Boolean active = true;
+    private Address address;
 
     public int getId() {
         return id;
@@ -107,6 +108,14 @@ public class Producer {
         this.active = active;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "Producer{" +
@@ -121,6 +130,7 @@ public class Producer {
                 ", registrationDate=" + registrationDate +
                 ", addressId=" + addressId +
                 ", active=" + active +
+                ", address=" + address +
                 '}';
     }
 }
