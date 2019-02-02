@@ -1,5 +1,7 @@
 package com.lpdm.msproduct.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,6 +20,8 @@ public class Producer {
     private LocalDateTime registrationDate;
     private int addressId;
     private Boolean active = true;
+
+    @JsonIgnore
     private Address address;
 
     public int getId() {
