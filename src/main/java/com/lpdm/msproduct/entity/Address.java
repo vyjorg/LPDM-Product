@@ -9,5 +9,5 @@ public class Address {
     private String streetNumber;
 
     private String complement;
-    
+
 }

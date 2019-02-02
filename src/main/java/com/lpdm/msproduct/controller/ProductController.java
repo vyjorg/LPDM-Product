@@ -5,6 +5,7 @@ import com.lpdm.msproduct.dao.ProductDao;
 import com.lpdm.msproduct.entity.Category;
 import com.lpdm.msproduct.entity.Product;
 import com.lpdm.msproduct.entity.Stock;
+import com.lpdm.msproduct.exception.ProducerNotFound;
 import com.lpdm.msproduct.exception.ProductNotFound;
 import com.lpdm.msproduct.proxy.ProducerProxy;
 import com.lpdm.msproduct.proxy.StockProxy;
@@ -98,6 +99,9 @@ public class ProductController {
     public Product addProduct(@Valid @RequestBody Product product){
         log.info("ProductController -> méthode addProduct : entrée ");
         log.info("ProductController -> méthode addProduct : product reçu = "+product.toString());
+        if(product.getProducer() == null || product.getProducer().getId() == 0){
+            throw new ProducerNotFound("L'objet Producer ne peut être null");
+        }
         product.setProducerID(product.getProducer().getId());
         log.debug("ProductController -> méthode findProduct : test ProducerId = "+product.getProducer().getId());
         Product productAdded = productDao.save(product);
@@ -139,6 +143,10 @@ public class ProductController {
     public void updateProduct(@Valid @RequestBody Product product){
         log.info("ProductController -> méthode updateProduct : entrée ");
         log.info("ProductController -> méthode updateProduct : product reçu = "+product.toString());
+
+        if(product.getProducer() == null || product.getProducer().getId() == 0){
+            throw new ProducerNotFound("L'objet Producer ne peut être null");
+        }
 
         product.setProducerID(product.getProducer().getId());
         log.debug("ProductController -> méthode updateProduct : test ProducerID = "+product.getProducer().getId());
