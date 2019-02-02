@@ -54,7 +54,7 @@ public class Product {
     private Integer producerID;
 
     @Transient
-    @NotNull(message = "le producteur ne peut être null")
+    //@NotNull(message = "le producteur ne peut être null")
     private Producer producer;
 
     public Integer getId() {
