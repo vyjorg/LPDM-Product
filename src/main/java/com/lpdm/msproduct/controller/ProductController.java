@@ -14,6 +14,8 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -263,5 +265,18 @@ public class ProductController {
 
         log.info("ProductController -> méthode listProductByName : sortie ");
         return listProducts;
+    }
+
+
+    /**
+     * Find {@link Page<Product>} by the product
+     * @param pageable The {@link Product}
+     * @return an {@link Page<Product>} json object
+     */
+    @ApiOperation(value = "Récupère tous les produits en fonction des demandes de l'url")
+    @GetMapping(value = "/listPageable",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    Page<Product> productsPageable(Pageable pageable) {
+        return productDao.findAll(pageable);
+
     }
 }
