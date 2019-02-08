@@ -12,6 +12,8 @@ public class Producer {
     private int id;
     private String email;
     private String password;
+
+    @JsonIgnore
     private List<AppRole> appRole;
     private String name;
     private String firstName;

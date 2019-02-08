@@ -273,7 +273,7 @@ public class ProductController {
      * @param pageable The {@link Product}
      * @return an {@link Page<Product>} json object
      */
-    @ApiOperation(value = "Récupère tous les produits en fonction des demandes de l'url")
+    @ApiOperation(value = "Récupère tous les produits en fonction du pageable")
     @GetMapping(value = "/listPageable",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     Page<Product> productsPageable(Pageable pageable) {
         return productDao.findAll(pageable);
