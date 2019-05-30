@@ -62,7 +62,6 @@ public class ProductController {
             product.setListStock(stockProxy.listStockByProductId(product.getId()));
             product.setProducer(producerProxy.findById(product.getProducerID()));
         }
-        log.debug("ProductController -> méthode listProduct : test list vide = "+list.size());
         
         return list;
     }
@@ -83,7 +82,6 @@ public class ProductController {
         }
         product.setListStock(stockProxy.listStockByProductId(product.getId()));
         product.setProducer(producerProxy.findById(product.getProducerID()));
-        log.debug("ProductController -> méthode findProduct : test Producer = "+product.getProducer().getName());
 
         return product;
     }
@@ -101,7 +99,6 @@ public class ProductController {
             throw new ProducerNotFound("L'objet Producer ne peut être null");
         }
         product.setProducerID(product.getProducer().getId());
-        log.debug("ProductController -> méthode findProduct : test ProducerId = "+product.getProducer().getId());
         Product productAdded = productDao.save(product);
 
         if (productAdded.equals(null)){
@@ -142,7 +139,7 @@ public class ProductController {
         }
 
         product.setProducerID(product.getProducer().getId());
-        log.debug("ProductController -> méthode updateProduct : test ProducerID = "+product.getProducer().getId());
+        
         productDao.save(product);
 /*
         if(!product.getListStock().equals(null)){
@@ -169,10 +166,8 @@ public class ProductController {
             throw new ProductNotFound("Aucun produit trouvé pour la catégory ayant pour id = "+id);
         }
 
-        log.debug("ProductController -> méthode listProductByCategoryById : test listProducts = "+listProducts.size());
-
         for(Product product : listProducts){
-            log.info("ProductController -> méthode listProductByCategoryById : boucle ");
+            
             product.setListStock(stockProxy.listStockByProductId(product.getId()));
             product.setProducer(producerProxy.findById(product.getProducerID()));
         }
