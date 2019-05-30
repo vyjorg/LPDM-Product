@@ -35,7 +35,7 @@ public class CategoryController {
     @ApiOperation(value = "Récupère tous les catégories de la bdd")
     @GetMapping(value = "/categories", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Category> listCategories(){
-        log.info("CategoryController -> méthode listCategories : entrée ");
+        
         List<Category> listCategory = categoryDao.findAll();
 
         if (listCategory == null){
@@ -43,7 +43,6 @@ public class CategoryController {
         }
         log.debug("CategoryController -> méthode listCategories : test listCategory = "+listCategory.size());
 
-        log.info("CategoryController -> méthode listCategories : sortie ");
         return listCategory;
     }
 
@@ -56,7 +55,7 @@ public class CategoryController {
     @ApiOperation(value = "Récupère une catégorie grâce à son ID si celui-ci existe dans la bdd")
     @GetMapping(value = "/categories/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Category category(@PathVariable int id){
-        log.info("CategoryController -> méthode category : entrée ");
+        
         Category category = categoryDao.findById(id);
 
         if (category == null){
@@ -64,8 +63,6 @@ public class CategoryController {
         }
         log.debug("CategoryController -> méthode category : test category = "+category.getId());
 
-        log.info("CategoryController -> méthode category : category envoyé = "+category.toString());
-        log.info("CategoryController -> méthode category : sortie ");
         return category;
     }
 
@@ -77,14 +74,12 @@ public class CategoryController {
     @ApiOperation(value = "Enregistre une catégorie si celle-ci est conforme")
     @PostMapping(value = "/categories", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void addCategory(@Valid @RequestBody Category category){
-        log.info("CategoryController -> méthode addCategory : entrée ");
-        log.info("CategoryController -> méthode addCategory : category reçu = "+category.toString());
+        
         Category categoryAdded = categoryDao.save(category);
 
         if(categoryAdded.equals(null)){
             log.debug("CategoryController -> méthode addCategory : Problème lors de l'ajout de la catégorie ");
         }
-        log.info("CategoryController -> méthode addCategory : sortie ");
     }
 
     /**
@@ -94,10 +89,9 @@ public class CategoryController {
     @ApiOperation(value = "Supprime une catégorie grâce à son ID si celui-ci existe dans la bdd")
     @DeleteMapping(value="/categories/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void deleteCategory(@PathVariable int id){
-        log.info("CategoryController -> méthode deleteCategory : entrée ");
-        log.info("CategoryController -> méthode deleteCategory : id reçu = "+id);
+        
         categoryDao.deleteById(id);
-        log.info("CategoryController -> méthode deleteCategory : sortie ");
+        
     }
 
     /**
@@ -107,10 +101,9 @@ public class CategoryController {
     @ApiOperation(value = "Met à jour une catégorie si celle-ci est conforme")
     @PutMapping(value = "/categories", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void updateCategory(@Valid @RequestBody Category category){
-        log.info("CategoryController -> méthode updateCategory : entrée ");
-        log.info("CategoryController -> méthode updateCategory : category reçu = "+category.toString());
+        
         categoryDao.save(category);
-        log.info("CategoryController -> méthode updateCategory : sortie ");
+        
     }
 
 }
