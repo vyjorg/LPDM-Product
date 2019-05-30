@@ -50,7 +50,7 @@ public class ProductController {
     @ApiOperation(value = "Récupère tous les produits de la bdd")
     @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProduct(){
-        log.info("ProductController -> méthode listProduct : entrée ");
+        
         List<Product> list = productDao.findAll();
 
         if (list == null){
@@ -63,7 +63,7 @@ public class ProductController {
             product.setProducer(producerProxy.findById(product.getProducerID()));
         }
         log.debug("ProductController -> méthode listProduct : test list vide = "+list.size());
-        log.info("ProductController -> méthode listProduct : sortie ");
+        
         return list;
     }
 
@@ -75,8 +75,7 @@ public class ProductController {
     @ApiOperation(value = "Récupère un produit grâce à son ID si celui-ci existe dans la bdd")
     @GetMapping(value="/products/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Product findProduct(@PathVariable int id){
-        log.info("ProductController -> méthode findProduct : entrée ");
-        log.info("ProductController -> méthode findProduct : id envoyé = "+id);
+        
         Product product = productDao.findById(id);
 
         if (product == null){
@@ -86,8 +85,6 @@ public class ProductController {
         product.setProducer(producerProxy.findById(product.getProducerID()));
         log.debug("ProductController -> méthode findProduct : test Producer = "+product.getProducer().getName());
 
-        log.info("ProductController -> méthode findProduct : product envoyé = "+product.toString());
-        log.info("ProductController -> méthode findProduct : sortie ");
         return product;
     }
 
@@ -99,8 +96,7 @@ public class ProductController {
     @ApiOperation(value = "Enregistre un produit si celui-ci est conforme")
     @PostMapping(value = "/products", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Product addProduct(@Valid @RequestBody Product product){
-        log.info("ProductController -> méthode addProduct : entrée ");
-        log.info("ProductController -> méthode addProduct : product reçu = "+product.toString());
+        
         if(product.getProducer() == null || product.getProducer().getId() == 0){
             throw new ProducerNotFound("L'objet Producer ne peut être null");
         }
@@ -111,7 +107,6 @@ public class ProductController {
         if (productAdded.equals(null)){
             log.debug("ProductController -> méthode findProduct : erreur lors de l'ajout");
         }
-        log.info("ProductController -> méthode addProduct : sortie ");
 
         return productAdded;
     }
@@ -123,8 +118,7 @@ public class ProductController {
     @ApiOperation(value = "Supprime un produit grâce à son ID si celui-ci existe dans la bdd")
     @DeleteMapping(value="/products/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void deleteProduct(@PathVariable int id){
-        log.info("ProductController -> méthode deleteProduct : entrée ");
-        log.info("ProductController -> méthode deleteProduct : id envoyé = "+id);
+        
         Product productDelete = productDao.findById(id);
         productDao.deleteById(id);
 
@@ -133,7 +127,6 @@ public class ProductController {
                 stockProxy.deleteStock(stockDelete.getId());
             }
         }
-        log.info("ProductController -> méthode deleteProduct : sortie ");
     }
 
     /**
@@ -143,8 +136,6 @@ public class ProductController {
     @ApiOperation(value = "Met à jour un produit si celui-ci est conforme")
     @PutMapping(value="/products", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void updateProduct(@Valid @RequestBody Product product){
-        log.info("ProductController -> méthode updateProduct : entrée ");
-        log.info("ProductController -> méthode updateProduct : product reçu = "+product.toString());
 
         if(product.getProducer() == null || product.getProducer().getId() == 0){
             throw new ProducerNotFound("L'objet Producer ne peut être null");
@@ -160,7 +151,7 @@ public class ProductController {
             }
         }
         */
-        log.info("ProductController -> méthode updateProduct : sortie ");
+        
     }
 
     /**
@@ -171,8 +162,7 @@ public class ProductController {
     @ApiOperation(value = "Récupère tous les produits en fonction de l'id de la categorie")
     @GetMapping(value = "/products/category/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByCategoryById(@PathVariable int id){
-        log.info("ProductController -> méthode listProductByCategoryById : entrée ");
-        log.info("ProductController -> méthode listProductByCategoryById : id envoyé = "+id);
+        
         List<Product> listProducts = productDao.findByCategoryId(id);
 
         if (listProducts == null){
@@ -186,7 +176,7 @@ public class ProductController {
             product.setListStock(stockProxy.listStockByProductId(product.getId()));
             product.setProducer(producerProxy.findById(product.getProducerID()));
         }
-        log.info("ProductController -> méthode listProductByCategoryById : sortie ");
+        
         return listProducts;
     }
 
@@ -198,8 +188,7 @@ public class ProductController {
     @ApiOperation(value = "Récupère tous les produits en fonction de la categorie")
     @PostMapping(value = "/products/category", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByCategory(@RequestBody Category category){
-        log.info("ProductController -> méthode listProductByCategory : entrée ");
-        log.info("ProductController -> méthode listProductByCategory : category reçu = "+category.toString());
+        
         List<Product> listProducts = productDao.findByCategoryId(category.getId());
 
         if (listProducts == null){
@@ -207,11 +196,11 @@ public class ProductController {
         }
 
         for(Product product : listProducts){
-            log.info("ProductController -> méthode listProductByCategory : boucle ");
+            
             product.setListStock(stockProxy.listStockByProductId(product.getId()));
             product.setProducer(producerProxy.findById(product.getProducerID()));
         }
-        log.info("ProductController -> méthode listProductByCategory : sortie ");
+        
         return listProducts;
     }
 
@@ -224,8 +213,7 @@ public class ProductController {
     @ApiOperation(value = "Récupère tous les produits en fonction de l'id du producteur")
     @GetMapping(value = "/products/producer/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByProducerId(@PathVariable int id){
-        log.info("ProductController -> méthode listProductByProducerId : entrée ");
-        log.info("ProductController -> méthode listProductByProducerId : id envoyé = "+id);
+        
         List<Product> listProducts = productDao.findByProducerID(id);
 
         if (listProducts == null){
@@ -233,11 +221,11 @@ public class ProductController {
         }
 
         for(Product product : listProducts){
-            log.info("ProductController -> méthode listProductByProducerId : boucle ");
+            
             product.setListStock(stockProxy.listStockByProductId(product.getId()));
             product.setProducer(producerProxy.findById(product.getProducerID()));
         }
-        log.info("ProductController -> méthode listProductByProducerId : sortie ");
+        
         return listProducts;
     }
 
@@ -249,8 +237,7 @@ public class ProductController {
     @ApiOperation(value = "Récupère tous les produits en fonction du nom de celui-ci")
     @GetMapping(value = "/products/name/{name}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Product> listProductByName(@PathVariable String name){
-        log.info("ProductController -> méthode listProductByName : entrée ");
-        log.info("ProductController -> méthode listProductByName : name envoyé = "+name);
+        
         List<Product> listProducts = productDao.findAllByNameContainingIgnoreCase(name);
 
         if (listProducts == null){
@@ -258,12 +245,12 @@ public class ProductController {
         }
 
         for(Product product : listProducts){
-            log.info("ProductController -> méthode listProductByName : entrée ");
+            
             product.setListStock(stockProxy.listStockByProductId(product.getId()));
             product.setProducer(producerProxy.findById(product.getProducerID()));
         }
 
-        log.info("ProductController -> méthode listProductByName : sortie ");
+        
         return listProducts;
     }
 
